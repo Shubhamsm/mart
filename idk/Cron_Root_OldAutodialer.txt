@@ -1,0 +1,97 @@
+MAILTO="cronjob@indiamart.com"
+
+GOPATH="/home3/indiamart/go"
+GOROOT="/usr/local/go"
+
+#DNS Refresh
+5 22 * * * /usr/local/bin/svc -t /service/int_dnscache
+
+# Synchronize clock to clock.redhat.com
+0 */6 * * * /usr/sbin/ntpdate pool.ntp.org > /dev/null 2>&1; /sbin/hwclock --systohc
+
+#Updates clamv Anti virus
+35 09 * * * /usr/local/clamav/bin/freshclam --quiet > /dev/null 2>&1
+
+# Log Rotate for Apache access_log and error_log
+0 0 * * * /bin/bash /home3/indiamart/autojobs/apache_rotatelogs.sh
+
+05 00 * * * /usr/local/root-cron/sshd_unblock.sh
+
+*/15 * * * * /usr/local/root-cron/sensitive_commands.sh
+
+10 0 * * * /usr/local/root-cron/activity_log.sh
+
+*/5 * * * * /usr/local/root-cron/iptables_status.sh > /dev/null 2>&1
+
+##nohup cleanup
+
+0 10 * * * /usr/local/root-cron/nohup_clean.sh
+
+0 10 * * * /usr/bin/find /home/indiamart/public_html/prod-redis-cron/mobile-alert/log/ -mtime +4 -exec rm -r {} \;
+
+0 */1 * * * /usr/bin/find /var/tmp/oradiag_root/diag/clients/user_root/host_3951850727_80/alert/ -type f -name "log*" -mmin +480 -exec rm -f {} \;
+
+
+0 */2 * * * cp /dev/null /var/tmp/oradiag_root/diag/clients/user_root/host_3951850727_80/trace/sqlnet.log
+
+#log backup of stshistory log for 30 days
+0 5 * * * /usr/bin/find /home3/indiamart/public_html/dev-weberp-auto-dialer/merp/logs/ -type f -iname "stshistor*.txt" -mtime +31 -exec rm {} \;
+
+0 5 * * * /usr/bin/find /home3/indiamart/public_html/prod-schedulers-go/logs/ -type f -mtime +6 -exec rm {} \;
+0 5 * * * /usr/bin/find /home3/indiamart/public_html/prod-weberp-auto-dialer/merp/logs/ -type f -mtime +7 -exec rm {} \;
+0 5 * * * /usr/bin/find /home3/indiamart/public_html/stg-weberp-auto-dialer/sendmail/Reports_Log/ -type f -mtime +180 -exec rm {} \;
+
+# changing permission of MERP Worker log
+01 00 * * * /bin/bash /home3/indiamart/public_html/cron/changePermissionMerpWorkerLog.sh >> /tmp/changePermissionMerpWorkerLog.log 2>&1
+
+#remove logs from dev server 1 days old
+0 5 * * * /usr/bin/find /home/indiamart/public_html/dev-weberp-auto-dialer/merp/logs/ -type f -mtime +1 -exec rm {} \;
+
+#remove logs from prod site 3 days old
+0 5 * * * /usr/bin/find /home/indiamart/public_html/prod-weberp-auto-dialer/merp/logs/  -iname "MerpWorkerLogs*.txt" -type f -mtime +3 -exec rm {} \;
+
+#remove marketing logs from dev server 5 days old
+0 6 * * * /usr/bin/find /home/indiamart/public_html/dev-weberp-auto-dialer/marketing/logs/  -type f -mtime +5 -exec rm {} \;
+
+#remove logs fron stg-path
+0 5 * * * /usr/bin/find /home3/indiamart/public_html/stg-weberp-auto-dialer/sendmail/Reports_Log -iname "*.json" -type f -mtime +7 -exec rm {} \;
+0 5 * * * /usr/bin/find /home3/indiamart/public_html/stg-weberp-auto-dialer/sendmail/Reports_CSV -iname "*.csv" -type f -mtime +7 -exec rm {} \;
+
+
+# SA-340343
+##30 04 * * * bash /home3/indiamart/public_html/cron/prod-gmeet.sh
+
+0 1 * * * /usr/bin/find /home/indiamart/oradiag_intermsh/diag/clients/user_intermsh/host_3951850727_80/alert -iname "*.xml" -type f -mtime +2 -exec rm {} \;
+0 2 * * * /usr/bin/find /home/indiamart/public_html/prod-schedulers-go/logs/ -mtime +2 -size +50M -exec rm {} \;
+
+
+# SA-345630
+
+##30 11 * * * /usr/local/go/bin/go run /home3/indiamart/public_html/prod-weberp-auto-dialer/merp/merp-go/src/Hosting_service/main.go >> /tmp/hosting_serviceLog.log 2>&1 
+
+00 02 * * * /usr/bin/find /home/indiamart/go/notification*.log -mtime +7  -exec ls -ltrh {} \;
+
+*/15 * * * * /usr/bin/cp /dev/null /tmp/prod-CSLBUSINESS_DATA_HOT_LEAD-Tp-out.log.4
+
+
+##SA-364985
+
+##*/30 09-19 * * 1-6 /usr/bin/php /home/indiamart/public_html/prod-weberp-auto-dialer/MeetingModifications.php  >> /tmp/MeetingModifications.log 2>&1
+
+
+##SA-368334
+*/5 * * * * /usr/local/go/bin/go run /home3/indiamart/public_html/prod-weberp-auto-dialer/merp/merp-go/src/csdhotlead/main.go >> /tmp/csdhotlead.log 2>&1
+
+##SA-368340
+0 8 * * * /usr/local/go/bin/go run /home/indiamart/public_html/prod-weberp-auto-dialer/merp/merp-go/src/nach-reactivation-hotlead/cron/nach-weekly-report.go >> /tmp/nach-weekly-report.log 2>&1
+
+###365506
+##00 05 * * * /usr/local/go/bin/go run /home3/indiamart/public_html/prod-weberp-auto-dialer/merp/merp-go/src/rewardpoints/main.go >> /tmp/rewardpoints.log 2>&1
+
+###376722
+##30 04 * * * /usr/bin/python /home3/indiamart/public_html/prod-weberp-auto-dialer/gmeet/gmeetAudit.py >> /tmp/gmeetAudit.log 2>&1
+
+## 377816
+#00 09 * * * /usr/local/go/bin/go run /home3/indiamart/public_html/prod-weberp-auto-dialer/merp/merp-go/src/pdcreminder/main.go >> /tmp/pdcreminder_go.log 2>&1
+
+00 18 * * 0 /usr/local/go/bin/go run /home3/indiamart/public_html/prod-weberp-auto-dialer/merp/merp-go/src/updatePrefCities/main.go >> /tmp/updatePrefCities.log 2>&1

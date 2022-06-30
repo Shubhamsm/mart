@@ -1,0 +1,124 @@
+ORACLE_HOME=/usr/lib/oracle/11.2/client64/
+TNS_ADMIN=/etc/oracle/
+
+0 * * * * /usr/bin/php /home3/indiamart/public_html/prod-weberp-auto-dialer/MCAT_API.php > /tmp/logfile.txt
+
+03 * * * * /usr/bin/php /home3/indiamart/public_html/prod-weberp-auto-dialer/TSBulkUpload.php > /tmp/logfile.txt
+
+0 * * * * /usr/bin/php /home3/indiamart/public_html/prod-weberp-auto-dialer/AR_ECS_MASTER.php > /tmp/logfile.txt
+
+15 23 * * * /usr/bin/php /home3/indiamart/public_html/prod-schedulers-go/razor_service.php
+
+00 6 * * * /usr/bin/php /home3/indiamart/public_html/prod-schedulers-go/salescall.php > /tmp/salescall.txt
+
+* * * * * bash /home3/indiamart/public_html/cron/QueryRunner2.sh
+
+* * * * * bash /home3/indiamart/public_html/cron/QueryRunner_HeavyQuery.sh
+
+* * * * * bash /home3/indiamart/public_html/cron/QueryRunnerHeavyWorker1.sh
+* * * * * bash /home3/indiamart/public_html/cron/QueryRunnerHeavyWorker2.sh
+
+* * * * * bash /home3/indiamart/public_html/cron/QueryRunnerHeavyWorker3.sh
+* * * * * bash /home3/indiamart/public_html/cron/QueryRunnerHeavyWorker4.sh
+
+00 03 * * * /usr/bin/php /home3/indiamart/public_html/prod-schedulers-go/razorpayrecurring_service.php > /tmp/razorpayrecurring.txt
+
+04-59/15 * * * * bash /home3/indiamart/public_html/cron/Opportunity_Insert_Purge.sh > /tmp/Opportunity_Insert_Purge.log 2>&1
+
+* * * * *    bash /home3/indiamart/public_html/cron/ExportToCSV.sh > /dev/null
+
+45 22 * * * /usr/bin/php  /home3/indiamart/public_html/prod-schedulers-go/assetinfinity.php > /tmp/assetinfinity.php
+
+30 21 * * * bash /home3/indiamart/public_html/cron/catalog_archive_data_collection.sh >> /tmp/Catalog_Archive.log 2>&1
+
+30 08 * * * bash /home3/indiamart/public_html/WorkAnivarsaryMailer_cron.sh  >> /tmp/WorkAnivarsaryMailer.txt 2>&1
+
+00 08 * * * bash /home3/indiamart/public_html/birthday_cron.sh  >> /tmp/bithday.log 2>&1
+
+00 */1 * * * /usr/bin/php /home3/indiamart/public_html/prod-schedulers-go/call_recording_to_vendor.php > /dev/null 2>&1
+
+00 10 * * * bash /home3/indiamart/public_html/rewards-program.sh >> /tmp/rewards-program.log 2>&1
+
+30 7 * * * /usr/bin/php /home3/indiamart/public_html/prod-schedulers-go/voc_ticket_mailers.php >> /tmp/voc_ticket_mailers.log 2>&1
+08 8,12,15,18 * * * /usr/bin/php /home/indiamart/public_html/prod-schedulers-go/eto-complete-workorder.php > /tmp/eto-complete-workorder.log 2>&1
+
+30 22 * * * /usr/bin/php /home3/indiamart/public_html/prod-schedulers-go/spanco_status.php
+30 06 * * * /usr/bin/php /home/indiamart/public_html/prod-schedulers-go/seller_ar_receipt_tagging_mailer.php > /tmp/seller_ar_receipt_tagging_mailer.log 2>&1
+
+30 06 * * * bash /home3/indiamart/public_html/sts_transfer.sh  >> /tmp/sts_transfer.log 2>&1
+
+15 8 * * 0 /usr/bin/php /home/indiamart/public_html/prod-schedulers-go/gst_scheduler_weekly.php > /tmp/gst_scheduler_weekly.log 2>&1
+
+4 9,12,15,18,21 * * * /usr/bin/php /home/indiamart/public_html/prod-schedulers-go/call_scheduler.php > /tmp/call_scheduler.log  2>&1
+
+04 19 * * * /usr/bin/php /home/indiamart/public_html/prod-schedulers-go/click_to_call.php >> /tmp/click_to_call.log 2>&1
+0 2 * * * /usr/bin/php /home3/indiamart/public_html/prod-schedulers-go/bl_auto_allocation.php >> /tmp/bl_auto_allocation.log 2>&1
+
+2-59/7 * * * * bash /home3/indiamart/public_html/cron/hot_lead_schedule_main.sh >> hot_lead_schedule_main.log 2>&1
+
+05 04 * * * /usr/bin/php /home/indiamart/public_html/prod-schedulers-go/focus_group_automation.php >> /tmp/focus_group_automation.log 2>&1
+
+03,18,33,48 * * * * bash /home3/indiamart/public_html/cron/notification.sh >> /tmp/notifications.log 2>&1
+
+#SA-302183
+00 5 * * * /usr/bin/php /home3/indiamart/public_html/prod-schedulers-go/csl_pg_log_scheduler.php > /tmp/csl_pg_log_scheduler_cron.log 2>&1
+#SA-304360
+45 6 * * * /usr/bin/php /home3/indiamart/public_html/prod-schedulers-go/emp_struct_scheduler.php >/tmp/emp_struct_scheduler_cron.log  2>&1
+
+# SA-304854
+01 5,16,20,22 * * * cd /home3/indiamart/public_html/prod-schedulers-go/;/usr/bin/php automation_receipt_dump.php >/tmp/automation_receipt_dump.log  2>&1
+
+## SA-316456
+00 10 * * 1 /usr/bin/php /home3/indiamart/public_html/prod-schedulers-go/gst_report.php > /tmp/gst_report.log 2>&1
+
+## SA-320434
+02-59/15 07-22 * * * bash /home3/indiamart/public_html/cron/paymentbanktransfer_main_php_go.sh > /tmp/AutoTest.log 2>&1
+00 23 * * * bash /home3/indiamart/public_html/cron/paymentbanktransfer_main_php_go.sh > /tmp/AutoTest.log 2>&1
+
+*/1 * * * * bash /home3/indiamart/public_html/cron/hotleadsales_main_go.sh >> /tmp/hotleadsales_main_go.log 2>&1
+
+
+00 09 * * * /usr/bin/php /home3/indiamart/public_html/prod-schedulers-go/60-90days_meet.php > /tmp/60-90days_meet.log 2>&1
+
+00 06 * * * /usr/bin/php /home3/indiamart/public_html/prod-schedulers-go/ive_download.php > /tmp/ive_download.log 2>&1
+03-59/15 * * * * bash /home3/indiamart/public_html/cron/nach_reactivation_hotlead_go.sh > /tmp/nach_reactivation_hotlead.log 2>&1
+03 9,14,18 * * * bash /home3/indiamart/public_html/cron/hotleadQueueCount-main.sh > /tmp/hotleadQueueCount-main.log 2>&1
+
+32 8,13,18 * * *  /usr/local/go/bin/go run /home3/indiamart/public_html/prod-weberp-auto-dialer/merp/merp-go/src/work_order_cron/main.go > /tmp/work_order_cron_main.log 2>&1
+
+52 13 * * * /usr/local/go/bin/go run /home3/indiamart/public_html/prod-weberp-auto-dialer/merp/merp-go/src/Hosting_service/main.go >> /tmp/hosting_serviceLog_2.log 2>&1
+
+
+00 09 * * 1 /usr/bin/php /home/indiamart/public_html/prod-schedulers-go/insider_report.php  > /tmp/insider_report.log 2>&1
+
+#SA-343335
+0 10 3 * * /usr/local/go/bin/go run /home3/indiamart/public_html/prod-weberp-auto-dialer/merp/merp-go/src/seller_performance_report_mailer/main.go > /tmp/seller_performance_report_mailer.log 2>&1
+
+#SA-345089
+13 12,15,18 * * *   /usr/bin/php /home3/indiamart/public_html/prod-weberp-auto-dialer/BulkUploadSegmentation.php  > /tmp/BulkUploadSegmentation.log 2>&1
+23 12,15,18 * * * /usr/bin/php /home3/indiamart/public_html/prod-weberp-auto-dialer/BULKUPLOADRETENTIONHL.php  > /tmp/BULKUPLOADRETENTIONHL.log 2>&1
+33 12,15,18 * * *  /usr/bin/php /home3/indiamart/public_html/prod-weberp-auto-dialer/BulkUploadMisTrail.php  > /tmp/BulkUploadMisTrail.log 2>&1
+
+00 06 * * * /usr/bin/php /home/indiamart/public_html/prod-schedulers-go/CSDKCDAutoAllocation.php > /tmp/CSDKCDAutoAllocation.log 2>&1
+05 06 * * 7  /usr/bin/php /home3/indiamart/public_html/prod-schedulers-go/external_domain.php  > /tmp/external_domain.log 2>&1
+
+##SA-359091
+04 9,17 * * * /usr/bin/php /home/indiamart/public_html/prod-weberp-auto-dialer/untaggedcancelledreceiptsnotify.php  > /tmp/untaggedcancelledreceiptsnotify.log 2>&1
+
+##SA-361791
+0 06 * * 1 /usr/bin/php /home/indiamart/public_html/prod-weberp-auto-dialer/Gstassignment.php > /tmp/Gstassignment.log 2>&1
+0 2 * * * /bin/bash /home3/indiamart/log-put-s3.sh
+
+02-59/30 09-19 * * 1-6 /usr/bin/php /home/indiamart/public_html/prod-weberp-auto-dialer/MeetingModifications.php  >> /tmp/MeetingModifications_new_2.log 2>&1
+
+32 8 * * * /usr/bin/php /home/indiamart/public_html/prod-weberp-auto-dialer/WhatsappInvoice.php > /tmp/WhatsappInvoice.log 2>&1
+
+
+## bi-dbcr 381863
+00 2 * * 1-6 /usr/local/go/bin/go run /home3/indiamart/public_html/prod-weberp-auto-dialer/merp/merp-go/src/HotleadDataQueue/main.go >> /tmp/HotLeadDataQueue.log 2>&1
+
+0 3 * * * /usr/local/go/bin/go run  /home3/indiamart/public_html/prod-weberp-auto-dialer/merp/merp-go/src/autotempblock/main.go  >> /tmp/autotempblock-main.log 2>&1
+47 8 * * * /usr/local/go/bin/go run /home3/indiamart/public_html/prod-weberp-auto-dialer/merp/merp-go/src/osreminder/main.go  >> /tmp/osreminder-main.log 2>&1 
+45 8 * * * /usr/local/go/bin/go run /home3/indiamart/public_html/prod-weberp-auto-dialer/merp/merp-go/src/pdcreminder/main.go  >> /tmp/pdcreminder-main.log 2>&1
+0 4 5,10,15,20,25,30 * * /usr/local/go/bin/go run /home3/indiamart/public_html/prod-weberp-auto-dialer/merp/merp-go/src/NachPresentmentCron/main.go  >> /tmp/NachPresentmentCron-main.log 2>&1
+

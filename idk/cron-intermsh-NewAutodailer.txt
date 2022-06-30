@@ -17,7 +17,7 @@ TNS_ADMIN="/etc/oracle/"
 
 
 ## SA- Badde Kalyan
-## 03 9,14,18 * * * bash /home3/indiamart/public_html/cron/hotleadQueueCount-main.sh > /tmp/hotleadQueueCount-main.log 2>&1
+## 03 9,14,18 * * * bash /home3/indiamart/public_html/cron/hotleadQueueCount-main.sh > /tmp/hotleadQueueCount-main.log 2>&1 
 ## 0 03 * * 1-6 /usr/local/go/bin/go run /home3/indiamart/public_html/prod-weberp-auto-dialer/merp/merp-go/src/HotleadDataQueue/main.go
 ## /1 * * * * bash /home3/indiamart/public_html/cron/hotleadsales_main_go.sh >> /tmp/hotleadsales_main_go.log 2>&1
 
@@ -25,7 +25,7 @@ TNS_ADMIN="/etc/oracle/"
 
 ### Rakesh Ranjan Kumar
 ## 05 22 * * * /usr/bin/php /home3/indiamart/public_html/prod-weberp-auto-dialer/stsautoassign.php > /tmp/stsautoassign.log 2>&1
-
+ 
 ## Abhishekh Verma  bi-sa 386538 386289
-00 10 * * * /usr/local/go/bin/go run /home/indiamart/public_html/prod-weberp-auto-dialer/merp/merp-go/src/renewaldiy/main.go >> /tmp/renewaldiy.log 2>&1
-00 10 * * * /usr/local/go/bin/go run /home/indiamart/public_html/prod-weberp-auto-dialer/merp/merp-go/src/reportctrsms/main.go >> /tmp/reportctrsms.log 2>&1
+00 10 * * * /usr/local/go/bin/go run /home/indiamart/public_html/prod-weberp-auto-dialer/merp/merp-go/src/renewaldiy/main.go > /tmp/renewaldiy.log 2>&1
+00 10 * * * /usr/local/go/bin/go run /home/indiamart/public_html/prod-weberp-auto-dialer/merp/merp-go/src/reportctrsms/main.go > /tmp/reportctrsms.log 2>&1
